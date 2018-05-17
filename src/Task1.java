@@ -18,6 +18,7 @@
         Input ([)]
         Output isn’t correct*/
 
+import java.util.HashMap;
 import java.util.Stack;
 
 public class Task1 {
@@ -27,29 +28,25 @@ public class Task1 {
     }
 
     public static void inputCheck(String input) {
-        char[] arr = input.toCharArray();
-        Stack<Character> stack = new Stack<Character>();
-        char temp;
 
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i]=='(' || arr[i]=='{' || arr[i]=='[' )
-            {
-                stack.push(arr[i]);
-            }
+        HashMap<Character, Character> map = new HashMap<Character, Character>();
+        map.put('(', ')');
+        map.put('[', ']');
+        map.put('{', '}');
 
-            if(arr[i]==')' ||arr[i]=='}' ||arr[i]==']') {
+        Stack<Character> stack = new Stack<>();
 
-                if(stack.isEmpty()) {
-                    System.out.println("Output isn’t correct");
-                    break;
-                }
 
-                temp = stack.pop();
+        for (int i = 0; i < input.length(); i++) {
+            char curr = input.charAt(i);
 
-                if((temp == '(' && arr[i] == ')') || (temp == '{' && arr[i] == '}') || (temp == '[' && arr[i] == ']')) {
-
+            if (map.keySet().contains(curr)) {
+                stack.push(curr);
+            } else if (map.values().contains(curr)) {
+                if (map.get(stack.peek()) == curr) {
+                    stack.pop();
                 } else {
-                    System.out.println("Output isn’t correct");
+                    System.out.println("Output isn`t correct");
                     break;
                 }
             }

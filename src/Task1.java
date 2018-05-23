@@ -18,18 +18,22 @@
         Input ([)]
         Output isn’t correct*/
 
+package HomeWork3WithTest;
+
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Task1 {
     public static void main(String[] args) {
-        String input = "([)]";
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
         inputCheck(input);
     }
 
-    public static void inputCheck(String input) {
+    public static String inputCheck(String input) {
 
-        HashMap<Character, Character> map = new HashMap<Character, Character>();
+        HashMap<Character, Character> map = new HashMap<>();
         map.put('(', ')');
         map.put('[', ']');
         map.put('{', '}');
@@ -46,11 +50,10 @@ public class Task1 {
                 if (map.get(stack.peek()) == curr) {
                     stack.pop();
                 } else {
-                    System.out.println("Output isn`t correct");
-                    break;
+                    return "Output isn`t correct";
                 }
             }
         }
-        System.out.println("Output is correct");
+        return "Output is correct";
     }
 }
